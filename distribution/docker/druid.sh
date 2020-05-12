@@ -41,6 +41,7 @@
 set -e
 SERVICE="$1"
 
+
 echo "$(date -Is) startup service $SERVICE"
 
 # We put all the config in /tmp/conf to allow for a
@@ -49,14 +50,14 @@ mkdir -p /tmp/conf/
 cp -r /opt/druid/conf/druid /tmp/conf/druid
 
 getConfPath() {
-    cluster_conf_base=/tmp/conf/druid/cluster
+    cluster_conf_base=/tmp/conf/druid/single-server/nano-quickstart
     case "$1" in
     _common) echo $cluster_conf_base/_common ;;
-    historical) echo $cluster_conf_base/data/historical ;;
-    middleManager) echo $cluster_conf_base/data/middleManager ;;
-    coordinator | overlord) echo $cluster_conf_base/master/coordinator-overlord ;;
-    broker) echo $cluster_conf_base/query/broker ;;
-    router) echo $cluster_conf_base/query/router ;;
+    historical) echo $cluster_conf_base/historical ;;
+    middleManager) echo $cluster_conf_base/middleManager ;;
+    coordinator | overlord) echo $cluster_conf_base/coordinator-overlord ;;
+    broker) echo $cluster_conf_base/broker ;;
+    router) echo $cluster_conf_base/router ;;
     esac
 }
 COMMON_CONF_DIR=$(getConfPath _common)
